@@ -588,14 +588,15 @@ const SUPABASE_URL = "https://yhvatpwnxubogvgohwgh.supabase.co";
           saveBtn.disabled = true;
           saveBtn.textContent = "Speichern...";
 
-          const { error } =
+          const { data, error } =
             await client
               .from("Prices")
               .update({
                 price_min: min,
                 price_max: max
               })
-              .eq("id", item.id);
+              .eq("id", item.id)
+.select("id, price_min, price_max");
 
           saveBtn.disabled = false;
           saveBtn.textContent = "Speichern";
