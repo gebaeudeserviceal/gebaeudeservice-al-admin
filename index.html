@@ -595,8 +595,8 @@ const SUPABASE_URL = "https://yhvatpwnxubogvgohwgh.supabase.co";
                 price_min: min,
                 price_max: max
               })
-              .eq("id", item.id)
-.select("id, price_min, price_max");
+            .eq("service", item.service)
+.select("id, service, price_min, price_max");
 
           saveBtn.disabled = false;
           saveBtn.textContent = "Speichern";
@@ -610,6 +610,14 @@ const SUPABASE_URL = "https://yhvatpwnxubogvgohwgh.supabase.co";
             return;
           }
 
+          if (!data || data.length === 0) {
+  showMessage(
+    rowMessage,
+    "Fehler: Supabase hat keine Preiszeile geändert.",
+    "error"
+  );
+  return;
+}
           item.price_min = min;
           item.price_max = max;
 
